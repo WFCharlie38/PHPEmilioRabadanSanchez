@@ -1,5 +1,5 @@
 <HTML>
-<HEAD><TITLE> EJ2-Direccion Red – Broadcast y Rango</TITLE></HEAD>
+<HEAD><TITLE> EJ3-Direccion Red – Broadcast y Rango</TITLE></HEAD>
 <BODY>
 <?php
 $ip="192.168.16.100/16";
