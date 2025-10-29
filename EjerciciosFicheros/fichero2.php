@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>Formulario de Alumnos</h2>
-    <form method="post">
+    <form action="post">
         <label>Nombre:</label><br>
         <input type="text" name="nombre" required><br><br>
 
