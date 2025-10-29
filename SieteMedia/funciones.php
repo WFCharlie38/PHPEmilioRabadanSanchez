@@ -16,7 +16,7 @@ function contarMano(&$jugador) {
 }
 
 function extraerInciales($nombre) {
-
+    $iniciales = "";
     $nombre_apellido =  preg_split('/\s+/', trim($nombre));
     $iniciales .= $nombre_apellido[0][0];
     $iniciales .= $nombre_apellido[1][0];
@@ -89,6 +89,7 @@ function mostrarGanadores($apuesta, $ganadores) {
 
     if (empty($ganadores)) {
         echo "No hay ganadores la casa se queda con todo";
+        $premio = 0;
     }
     elseif ($puntuacion == 7.5) {
         if (count($ganadores) > 1) {
@@ -118,6 +119,38 @@ function mostrarGanadores($apuesta, $ganadores) {
         $premio = $apuesta * 0.5;
         echo "</br>Los ganadores han obtenido $premio$ de premio";
     }
+
+    return $premio;
+}
+
+function generarFichero($iniciales, $ganadores, $premio) {
+    $fecha = date("d-m-Y-H-i-s");
+    if (!empty($ganadores)) {
+        $repartido = $premio / count($ganadores);
+    }
+    else {
+        $repartido = 0;
+    }
+    $premios = count($ganadores);
+    $iniciales_ganadores = array_map('extraerInciales', array_keys($ganadores));
+    $archivo = "";
+    
+    foreach ($iniciales as $inicial => $puntuacion) {
+
+        if (in_array($inicial,$iniciales_ganadores)) {
+            $dinero = $repartido;
+        }
+        else {
+            $dinero = 0;
+        }        
+        $archivo .= "$inicial#$puntuacion#$dinero\n";
+    }
+
+    $archivo .= "TOTALPREMIOS#$premios#$repartido";
+
+    $fichero = fopen("./ficheros/$fecha.txt", "a+");
+    fwrite($fichero, $archivo);
+    fclose($fichero);
 }
 
 function limpiar_campos($data) {
@@ -126,10 +159,4 @@ function limpiar_campos($data) {
         $data = htmlspecialchars($data);
         return $data;
     }
-
-function ajustarCampo($texto, $longitud) {
-        $texto = substr($texto, 0, $longitud);
-        return str_pad($texto, $longitud, " ");
-    }
-
 ?>

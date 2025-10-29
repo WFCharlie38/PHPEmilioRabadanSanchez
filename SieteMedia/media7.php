@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jugador3 = array();
     $jugador4 = array();
 
-
     for ($i=0; $i < $cartas; $i++) { 
         extraer_carta($baraja,$jugador1);
     };
@@ -43,11 +42,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre4 => contarMano($jugador4)
     );
 
+    $iniciales = array(
+        extraerInciales($nombre1) => contarMano($jugador1),
+        extraerInciales($nombre2) => contarMano($jugador2),
+        extraerInciales($nombre3) => contarMano($jugador3),
+        extraerInciales($nombre4) => contarMano($jugador4)
+    );
+
     $ganadores = extraerGanadores($manos);
 
-    mostrarGanadores($apuesta, $ganadores);
+    $premio = mostrarGanadores($apuesta, $ganadores);
     mostrarCartas($nombre1,$nombre2,$nombre3,$nombre4,$jugador1,$jugador2,$jugador3,$jugador4);
-
+    generarFichero($iniciales, $ganadores, $premio);
+    
 
 }
 
