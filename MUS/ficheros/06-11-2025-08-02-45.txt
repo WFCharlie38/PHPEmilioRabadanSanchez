@@ -1,0 +1,13 @@
+PUNTUACIONES: 
+Pedro Sanchez##23##0
+Santiago Abascal##23##0
+Cristiano Ronaldo##19##0
+Ibai Llanos##26##95000
+TOTAL PREMIOS PUNTUACION##1##95000
+
+JUGADAS: 
+Pedro Sanchez##23##31666.666666667
+Santiago Abascal##23##0
+Cristiano Ronaldo##19##31666.666666667
+Ibai Llanos##26##31666.666666667
+TOTAL PREMIOS JUGADA##3##95000

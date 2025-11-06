@@ -1,0 +1,10 @@
+Pedro Sanchez#22#0
+Santiago Abascal#27#0
+Cristiano Ronaldo#23#0
+Ibai Llanos#29#95000
+TOTALPREMIOSPUNTUACION#1#95000
+Pedro Sanchez#22#23750
+Santiago Abascal#27#23750
+Cristiano Ronaldo#23#23750
+Ibai Llanos#29#23750
+TOTALPREMIOSJUGADA#4#95000
