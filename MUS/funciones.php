@@ -178,7 +178,7 @@ function generarFichero($jugadores, $jganadores,$pganadores, $premio){
     $archivo .= "PUNTUACIONES: \n";
     
     foreach ($jugadores as $jugador) {
-        $premiop=0;
+        $premiop=0;          
         foreach ($pganadores as $ganador) {
             if($jugador['nombre']==$ganador['nombre']){
             $premiop= $repartidop;
