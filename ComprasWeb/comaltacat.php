@@ -35,8 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname",$username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";
-        echo "</br>";
 
         $stmt = $conn->prepare("SELECT MAX(SUBSTR(ID_CATEGORIA, -3)) FROM categoria;");
         $stmt->execute();
@@ -44,10 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $codigo = $stmt->fetchColumn() +1;
         $codigo = str_pad((string)$codigo, 3, "0", STR_PAD_LEFT);
         $id_cat = "C-" . $codigo;
-
-        echo "ID Categoría: " . $id_cat;
-        echo "</br>";
-        echo "Nombre: " . $nombre;
 
         $stmt = $conn->prepare("INSERT INTO categoria(ID_CATEGORIA,NOMBRE) VALUES (:id_categoria,:nombre)");
         $stmt->bindParam(':id_categoria', $id_cat);
