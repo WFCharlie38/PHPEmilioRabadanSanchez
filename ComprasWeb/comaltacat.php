@@ -37,16 +37,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         echo "Connected successfully";
         echo "</br>";
-        $sql = "SELECT MAX(SUBSTR(ID_CATEGORIA, -3)) FROM categoria";
-        $stmt = $conn->query($sql);
+
+        $stmt = $conn->prepare("SELECT MAX(SUBSTR(ID_CATEGORIA, -3)) FROM categoria;");
+        $stmt->execute();
+
         $codigo = $stmt->fetchColumn() +1;
         $codigo = str_pad((string)$codigo, 3, "0", STR_PAD_LEFT);
         $id_cat = "C-" . $codigo;
+
         echo "ID Categoría: " . $id_cat;
         echo "</br>";
         echo "Nombre: " . $nombre;
-        $sql = "INSERT INTO categoria VALUES('$id_cat','$nombre')";
-        $stmt = $conn->query($sql);
+
+        $stmt = $conn->prepare("INSERT INTO categoria(ID_CATEGORIA,NOMBRE) VALUES (:id_categoria,:nombre)");
+        $stmt->bindParam(':id_categoria', $id_cat);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->execute();
 
         }
     catch(PDOException $e)
