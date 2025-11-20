@@ -10,19 +10,26 @@ function closeBD(&$conn) {
     $conn = null;
 }
 
-function select($conn, $sentencia) {
+function selectCOL($conn, $sentencia) {
     $stmt = $conn->prepare("$sentencia");
     $stmt->execute();
-    return $stmt;
+    return $stmt->fetchColumn();
 }
 
-/*function insert($conn, $tabla, $valores, $sentencia) {
-    $stmt = select($conn, "DESCRIBE $tabla");
-    $campos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+function selectASSOC($conn, $sentencia) {
     $stmt = $conn->prepare("$sentencia");
-    foreach($campos as $campo) {
-        $stmt->bindParam(":'" . $campo ."'", $descripcion);
-    }
     $stmt->execute();
-}*/
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
+}
+
+// function insert($conn, $tabla, $valores, $sentencia) {
+//     $stmt = select($conn, "DESCRIBE $tabla");
+//     $campos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+//     $stmt = $conn->prepare("$sentencia");
+//     foreach($campos as $campo) {
+//         $stmt->bindParam(":'" . $campo ."'", $descripcion);
+//     }
+//     $stmt->execute();
+// }
 ?>

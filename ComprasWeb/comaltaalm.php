@@ -28,8 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $conn = openBD($dbname); 
 
-        $stmt = select($conn,"SELECT MAX(NUM_ALMACEN) FROM almacen");
-        $id_almacen = $stmt->fetchColumn() +1;
+        $id_almacen = selectCOL($conn,"SELECT MAX(NUM_ALMACEN) FROM almacen") +1;
 
         $stmt = $conn->prepare("INSERT INTO almacen(NUM_ALMACEN,LOCALIDAD) VALUES (:num_almacen,:localidad)");
         $stmt->bindParam(':num_almacen', $id_almacen);
